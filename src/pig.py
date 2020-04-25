@@ -103,36 +103,44 @@ while True:
         amt = int(sys.stdin.readline().rstrip("\n"))
         code = sys.stdin.read(amt)
 
-        eprint(lang)
+        with open('tmp', 'a') as myfile:
+            myfile.write("LANG {}\n".format(lang))
+            myfile.write("AMT {}\n".format(amt))
+            myfile.write("CODE {}\n".format(code))
 
-        rv = ""
-        try:
+            rv = ""
             try:
-                if lang == "gdb":
-                    lex = GDBLexer(encoding="utf-8")
-                elif lang == "toml":
-                    lex = TOMLLexer(encoding="utf-8")
-                else:
-                    lex = get_lexer_by_name(lang, encoding="utf-8")
-            except ClassNotFound as err:
-                eprint("Unknown language: {}".format(lang))
-                lex = get_lexer_by_name("text", encoding="utf-8")
+                try:
+                    if lang == "gdb":
+                        lex = GDBLexer(encoding="utf-8")
+                    elif lang == "toml":
+                        lex = TOMLLexer(encoding="utf-8")
+                    else:
+                        lex = get_lexer_by_name(lang, encoding="utf-8")
+                except ClassNotFound as err:
+                    myfile.write("Unknown language: {}".format(lang))
+                    lex = get_lexer_by_name("text", encoding="utf-8")
 
-            rv = highlight(code, lex, html)
-        except ValueError as err:
-            rv = "Pygments Error: {}".format(err)
+                rv = highlight(code, lex, html)
+            except ValueError as err:
+                rv = "Pygments Error: {}".format(err)
 
-        sys.stdout.write(str(len(rv)))
-        sys.stdout.write("\n")
-        sys.stdout.flush()
+            myfile.write("LEN {}\n".format(len(rv)))
 
-        if not hasattr(sys.stdout, 'buffer'):
-            sys.stdout.write(rv)
+            sys.stdout.write(str(len(rv)))
+            sys.stdout.write("\n")
             sys.stdout.flush()
-        else:
-            sys.stdout.buffer.write(rv)
-            sys.stdout.buffer.flush()
+
+            if not hasattr(sys.stdout, 'buffer'):
+                sys.stdout.write(rv)
+                sys.stdout.flush()
+            else:
+                sys.stdout.buffer.write(rv)
+                sys.stdout.buffer.flush()
+
+            myfile.write("{}".format(rv))
     except Exception as err:
-        sys.stderr.write("Uncaught error: {}".format(err))
-        sys.stderr.flush()
+        with open('fail', 'a') as myfile:
+            myfile.write("Uncaught error: {}".format(err))
+        sys.exit()
 

@@ -184,6 +184,99 @@ int main(int *argc, int *argv[]) {
 }
 ```
 
+More code:
+
+```{.bash}
+$ crapthing "one" | sort -n
+```
+
+```{.vim}
+autocmd Filetype javascript setlocal ts=2 sts=2 sw=2
+
+" vimwiki
+let g:taskwiki_disable_concealcursor = 1
+
+    au! BufRead,BufNewFile *.ptree set filetype=pollen
+```
+
+```{.racket}
+(define (def . args)
+  (match args
+    [(list url text ..1)
+     #:when (string? url)
+     `(em ((class "def"))
+        ,(apply link url text))]
+```
+
+```{.rust}
+    /// Scan up to a byte, the byte will not be included in the result.
+    pub fn scan_upto(&mut self, b: u8) -> Vec<u8> {
+        let mut res = Vec::with_capacity(cmp::min(16, self.data.len() - self.i));
+        loop {
+            match self.peek_byte() {
+                Some(x) => {
+                    if x == b { break; }
+                    res.push(x);
+                    self.advance(1);
+                },
+                None => break,
+            }
+        }
+        res
+    }
+}
+```
+
+```{.perl}
+sub find_matches {
+    my ($dir, @patterns) = @_;
+    my @matches;
+
+    $dir = dirname($0) . "/$dir";
+
+    opendir (my $dh, $dir);
+    while (my $file = readdir($dh)) {
+        next if $file =~ /^\./;
+
+        my $found = 0;
+
+        # Can match against id as well
+        if (has_match($file, @patterns)) {
+            $found = 1;
+        }
+```
+
+```{.python}
+#!/usr/bin/python3
+
+import glob
+import os
+import subprocess
+
+def main():
+    total = 0
+    outputs = []
+    for f in glob.glob('*.html'):
+        res = subprocess.run(f'sed "s/<[^>]*>//g" {f} | wc -c',
+                shell=True, capture_output=True)
+        wordcount = int(res.stdout.decode('utf-8'))
+        total += wordcount
+        outputs.append('{:6} {}'.format(wordcount, f))
+    outputs.sort()
+    for x in reversed(outputs):
+        print(x)
+    print('{:6}'.format(total))
+
+if __name__ == '__main__':
+    main()
+```
+
+```{.cpp}
+public class MyClass {
+
+}
+```
+
 [^1]: Here is the footnote.
 
 [^longnote]: Here's one with multiple blocks.

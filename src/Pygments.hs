@@ -35,7 +35,7 @@ type Streams = (S.OutputStream C.ByteString, S.InputStream C.ByteString)
 
 pygmentsServer :: IO Streams
 pygmentsServer = do
-  (inp, out, _, _) <- runInteractiveProcess "python" ["src/pig.py"] Nothing Nothing
+  (inp, out, _, _) <- runInteractiveProcess "python3" ["/home/tree/code/jonashietala/src/pig.py"] Nothing Nothing
   return (inp, out)
 
 pygments :: Streams -> Pandoc -> Compiler Pandoc
@@ -43,19 +43,32 @@ pygments streams = walkM (generateCodeBlock streams)
 
 generateCodeBlock :: Streams -> Block -> Compiler Block
 generateCodeBlock streams (CodeBlock (_, classes, keyvals) contents) = do
+  --let lang = unpack $ fromMaybe (if null classes then "text" else head classes) $ lookup "lang" keyvals
+
+  --code <- if lang == "text"
+            --then return $ renderHtml $ H.toHtml contents
+            --else pygmentize streams lang (unpack contents)
+
+  --let colored = renderHtml $ H.pre $ H.code ! A.class_ (H.toValue $ "highlight language-" ++ lang) $ do
+                  --preEscapedToHtml code
+      --caption = maybe "" (renderHtml . H.figcaption . H.span . preEscapedToHtml) $ lookup "text" keyvals
+      --composed = renderHtml $ H.figure ! A.class_ "codeblock" $ do
+                   --preEscapedToHtml $ caption ++ colored
+
+  --return $ RawBlock "html" (pack composed)
+
   let lang = unpack $ fromMaybe (if null classes then "text" else head classes) $ lookup "lang" keyvals
 
   code <- if lang == "text"
             then return $ renderHtml $ H.toHtml contents
             else pygmentize streams lang (unpack contents)
-
+  
   let colored = renderHtml $ H.pre $ H.code ! A.class_ (H.toValue $ "highlight language-" ++ lang) $ do
                   preEscapedToHtml code
-      caption = maybe "" (renderHtml . H.figcaption . H.span . preEscapedToHtml) $ lookup "text" keyvals
-      composed = renderHtml $ H.figure ! A.class_ "codeblock" $ do
-                   preEscapedToHtml $ caption ++ colored
+      --composed = renderHtml $ H.figure ! A.class_ "codeblock" $ do
+                   --preEscapedToHtml $ caption ++ colored
 
-  return $ RawBlock "html" (pack composed)
+  return $ RawBlock "html" (pack colored)
 generateCodeBlock _ x = return x
 
 pygmentize :: Streams -> String -> String -> Compiler String
