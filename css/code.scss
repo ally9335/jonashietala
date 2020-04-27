@@ -43,7 +43,6 @@ code a, code a:hover {
 }
 .highlight {
     .hll { background-color: $gb-lm-bg2 }
-    .bp { color: $gb-lm-light-red } /* Name.Builtin.Pseudo */
     .c { color: $gb-lm-fg4; font-style: italic } /* Comment */
     .c1 { color: $gb-lm-fg4; font-style: italic } /* Comment.Single */
     .ch { color: $gb-lm-fg4; font-style: italic } /* Comment.Hashbang */
@@ -55,7 +54,7 @@ code a, code a:hover {
     .gd { color: $gb-lm-light-red } /* Generic.Deleted */
     .ge { font-style: italic } /* Generic.Emph */
     .gh { color: $gb-lm-light-green; font-weight: bold } /* Generic.Heading */
-    //.gi { color: #00A000 } /* Generic.Inserted */
+    .gi { color: $gb-lm-light-green } /* Generic.Inserted */
     //.go { color: #888888 } /* Generic.Output */
     .gp { color: $gb-lm-fg2; font-weight: bold } /* Generic.Prompt */
     .gr { color: $gb-lm-fg0; font-weight: bold } /* Generic.Error */
@@ -79,12 +78,13 @@ code a, code a:hover {
     //.n { color: $gb-lm-light-green } /* Name */
     //.na { color: #7D9029 } /* Name.Attribute */
     .nb { color: $gb-lm-light-green; font-weight: bold; } /* Name.Builtin */
+    .bp { color: $gb-lm-light-red } /* Name.Builtin.Pseudo */
     .nc { color: $gb-lm-light-green } /* Name.Class */
     //.nd { color: #AA22FF } /* Name.Decorator */
     //.ne { color: #D2413A } /* Name.Exception */
     .nf { color: $gb-lm-light-green; font-weight: bold } /* Name.Function */
     .fm { color: $gb-lm-light-green; font-weight: bold } /* Name.Function.Magic */
-    //.ni { color: #999999 } /* Name.Entity */
+    .ni { color: $gb-lm-light-aqua } /* Name.Entity */
     //.nl { color: #A0A000 } /* Name.Label */
     //.nn { color: #0000FF } /* Name.Namespace */
     .no { color: $gb-lm-light-purple } /* Name.Constant */
@@ -109,7 +109,7 @@ code a, code a:hover {
     //.vc { color: #19177C } /* Name.Variable.Class */
     //.vg { color: #19177C } /* Name.Variable.Global */
     //.vi { color: #19177C } /* Name.Variable.Instance */
-    //.vm { color: #19177C } /* Name.Variable.Magic */
+    .vm { color: $gb-lm-light-orange } /* Name.Variable.Magic */
     //.w { color: #bbbbbb } /* Text.Whitespace */
 }
 .language-racket {

@@ -9,7 +9,7 @@ A caveat: I generated [Tufte CSS][] style sidenotes and marginnotes which made i
 
 So in Pollen markup I want to be able to write this:
 
-```
+```{.pollen}
 Lisp is a pretty nice ◊sn{cult} language.
 
 ◊ndef["cult"]{
@@ -41,7 +41,7 @@ You also cannot use an `aside` instead of a `span` directly here as you cannot h
 
 Tufte has both sidenotes and marginnotes which we can implement in a general way. This is the markup:
 
-```
+```{.pollen}
 This has a sidenote with numbers.◊sn{note}
 
 This has a marginnote without numbers.◊mn{note}
