@@ -1,4 +1,4 @@
-from pygments.lexer import RegexLexer, bygroups, using, include
+from pygments.lexer import *
 from pygments.token import *
 from pygments.lexers.lisp import RacketLexer
 import re
@@ -19,29 +19,29 @@ class PollenLexer(RegexLexer):
 
     tokens = {
         'root': [
-            include('magic'),
+            (r'◊;.*?$', Comment),
+            ('◊', Name.Variable.Magic, 'post-magic'),
             (r'.', Text)
         ],
 
-        'magic': [
-            (r'◊;.*?$', Comment, '#pop'),
-            (r'◊', Name.Variable.Magic, 'post-magic'),
-        ],
-
         'post-magic': [
-            # |var|
             (r'(\|)(%s)(\|)' % variable,
                 bygroups(Name.Variable.Magic, Name.Variable, Name.Variable.Magic),
                 '#pop'),
-            # (
-            (r'(\()',
-                Name.Variable.Magic, ('#pop', 'racket-parens')),
-            # var
+            (r'(\()(.+)(\))',
+                bygroups(Name.Variable.Magic,
+                         using(RacketLexer, state='unquoted-datum'),
+                         Name.Variable.Magic),
+                '#pop'),
             (r'%s' % variable, Name.Variable, ('#pop', 'post-var')),
         ],
 
         'post-var': [
-            (r'\[', Name.Variable.Magic, ('#pop', 'curly-start', 'racket-brackets')),
+            (r'(\[)(.+?)(\])',
+                bygroups(Name.Variable.Magic,
+                         using(RacketLexer, state='unquoted-datum'),
+                         Name.Variable.Magic),
+                ('#pop', 'curly-start')),
             include('curly-start'),
         ],
 
@@ -50,21 +50,8 @@ class PollenLexer(RegexLexer):
         ],
 
         'curly-end': [
-            include('magic'),
             (r'\}', Name.Variable.Magic, '#pop'),
-            (r'.', Text)
-        ],
-
-        'racket-parens': [
-            (r'(.+)(\))',
-                bygroups(using(RacketLexer, state='unquoted-datum'), Name.Variable.Magic),
-                '#pop')
-        ],
-
-        'racket-brackets': [
-            (r'(.+?)(\])',
-                bygroups(using(RacketLexer, state='unquoted-datum'), Name.Variable.Magic),
-                '#pop')
+            include('root'),
         ],
     }
 
