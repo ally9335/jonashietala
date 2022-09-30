@@ -1289,15 +1289,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "879d54834c8c76457ef4293a689b2a8c59b076067ad77b15efafbb05f92a592b"
 
 [[package]]
-name = "itemref-derive"
-version = "0.1.0"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
 name = "itertools"
 version = "0.10.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1319,6 +1310,119 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "1aab8fc367588b89dcee83ab0fd66b72b50b72fa1904d7095045ace2b0c81c35"
 
 [[package]]
+name = "jh-content"
+version = "0.1.0"
+dependencies = [
+ "chrono",
+ "eyre",
+ "grass",
+ "html-escape",
+ "jh-itemref-derive",
+ "lazy_static",
+ "rayon",
+ "regex",
+ "serde",
+ "serde_yaml",
+ "tera",
+ "tracing",
+ "yaml-front-matter",
+]
+
+[[package]]
+name = "jh-feed"
+version = "0.1.0"
+
+[[package]]
+name = "jh-gen"
+version = "0.1.0"
+
+[[package]]
+name = "jh-item"
+version = "0.1.0"
+dependencies = [
+ "camino",
+ "eyre",
+ "jh-util",
+ "tera",
+ "tracing",
+]
+
+[[package]]
+name = "jh-itemref-derive"
+version = "0.1.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "jh-markdown"
+version = "0.1.0"
+dependencies = [
+ "camino",
+ "colored",
+ "eyre",
+ "html-escape",
+ "itertools",
+ "jh-paths",
+ "jh-util",
+ "lazy_static",
+ "pulldown-cmark",
+ "regex",
+ "scraper",
+ "syntect",
+ "tracing",
+ "walkdir",
+]
+
+[[package]]
+name = "jh-paths"
+version = "0.1.0"
+dependencies = [
+ "camino",
+ "eyre",
+ "tempfile",
+]
+
+[[package]]
+name = "jh-settings"
+version = "0.1.0"
+dependencies = [
+ "lazy_static",
+ "url",
+]
+
+[[package]]
+name = "jh-site"
+version = "0.1.0"
+
+[[package]]
+name = "jh-tests"
+version = "0.1.0"
+
+[[package]]
+name = "jh-upload"
+version = "0.1.0"
+
+[[package]]
+name = "jh-util"
+version = "0.1.0"
+dependencies = [
+ "camino",
+ "chrono",
+ "eyre",
+ "glob",
+ "jh-settings",
+ "lazy_static",
+ "regex",
+ "scraper",
+ "tera",
+ "tracing",
+ "url",
+]
+
+[[package]]
 name = "jonashietala_se"
 version = "0.1.0"
 dependencies = [
@@ -1335,8 +1439,17 @@ dependencies = [
  "grass",
  "hotwatch",
  "html-escape",
- "itemref-derive",
  "itertools",
+ "jh-content",
+ "jh-feed",
+ "jh-gen",
+ "jh-item",
+ "jh-itemref-derive",
+ "jh-markdown",
+ "jh-paths",
+ "jh-site",
+ "jh-tests",
+ "jh-upload",
  "lazy_static",
  "md5",
  "new_mime_guess",

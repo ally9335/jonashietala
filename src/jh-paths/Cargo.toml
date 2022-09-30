@@ -1,0 +1,12 @@
+[package]
+name = "jh-paths"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+camino = "1.0.7"
+eyre = "0.6.8"
+tempfile = "3.3.0"
+
+[lib]
+

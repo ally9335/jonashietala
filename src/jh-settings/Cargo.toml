@@ -1,0 +1,10 @@
+[package]
+name = "jh-settings"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+url = "2.2.2"
+lazy_static = "1.4.0"
+
+[lib]

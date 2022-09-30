@@ -1,0 +1,22 @@
+[package]
+version = "0.1.0"
+name = "jh-markdown"
+edition = "2021"
+
+[dependencies]
+eyre = "0.6.8"
+regex = "1"
+syntect = { version = "5.0.0", default-features = false, features = ["html", "regex-onig", "default-syntaxes", "yaml-load", "plist-load"] }
+pulldown-cmark = { version = "0.9.1", default-features = false, features = ["simd"] }
+tracing = "0.1.34"
+lazy_static = "1.4.0"
+camino = "1.0.7"
+itertools = "0.10.3"
+colored = "2.0.0"
+scraper = "0.13.0"
+walkdir = "2"
+html-escape = "0.2.11"
+jh-paths = { path = "../jh-paths" }
+jh-util = { path = "../jh-util" }
+
+[lib]

@@ -1,0 +1,21 @@
+[package]
+name = "jh-content"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+eyre = "0.6.8"
+chrono = "0.4.19"
+grass = "0.11.0"
+html-escape = "0.2.11"
+lazy_static = "1.4.0"
+rayon = "1.5.3"
+regex = "1"
+serde = "1.0"
+serde_yaml = "0.8"
+tera = "1"
+tracing = "0.1.34"
+yaml-front-matter = "0.1.0"
+jh-itemref-derive = { path = "../jh-itemref-derive" }
+
+[lib]
